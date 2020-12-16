@@ -1,26 +1,26 @@
 {
-    "dev": {
-        "awscloudformation": {
-            "AuthRoleName": "amplify-amplifytextract-dev-234231-authRole",
-            "UnauthRoleArn": "arn:aws:iam::977333076319:role/amplify-amplifytextract-dev-234231-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::977333076319:role/amplify-amplifytextract-dev-234231-authRole",
-            "Region": "ap-southeast-2",
-            "DeploymentBucketName": "amplify-amplifytextract-dev-234231-deployment",
-            "UnauthRoleName": "amplify-amplifytextract-dev-234231-unauthRole",
-            "StackName": "amplify-amplifytextract-dev-234231",
-            "StackId": "arn:aws:cloudformation:ap-southeast-2:977333076319:stack/amplify-amplifytextract-dev-234231/d5f568b0-3e09-11eb-8b76-06cd7cce2cd2",
-            "AmplifyAppId": "d2kmyworl2po7w"
-        },
-        "categories": {
-            "auth": {
-                "amplifytextract7f442847": {}
-            },
-            "hosting": {
-                "amplifyhosting": {
-                    "appId": "d2kmyworl2po7w",
-                    "type": "manual"
-                }
-            }
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-amplifytextract-dev-234231-authRole",
+      "UnauthRoleArn": "arn:aws:iam::977333076319:role/amplify-amplifytextract-dev-234231-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::977333076319:role/amplify-amplifytextract-dev-234231-authRole",
+      "Region": "ap-southeast-2",
+      "DeploymentBucketName": "amplify-amplifytextract-dev-234231-deployment",
+      "UnauthRoleName": "amplify-amplifytextract-dev-234231-unauthRole",
+      "StackName": "amplify-amplifytextract-dev-234231",
+      "StackId": "arn:aws:cloudformation:ap-southeast-2:977333076319:stack/amplify-amplifytextract-dev-234231/d5f568b0-3e09-11eb-8b76-06cd7cce2cd2",
+      "AmplifyAppId": "d2kmyworl2po7w"
+    },
+    "categories": {
+      "auth": {
+        "amplifytextract7f442847": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d2kmyworl2po7w",
+          "type": "manual"
         }
+      }
     }
+  }
 }

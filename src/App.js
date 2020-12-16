@@ -1,10 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { useState } from 'react';
-import Amplify, { Predictions } from 'aws-amplify';
+import Amplify, { Predictions, Storage } from 'aws-amplify';
 import { AmazonAIPredictionsProvider } from '@aws-amplify/predictions';
 import { createForm, createTables } from 'aws-textract-helper';
 import awsconfig from './aws-exports';
+import fs from 'fs';
 
 Amplify.configure(awsconfig);
 Amplify.addPluggable(new AmazonAIPredictionsProvider());
@@ -22,6 +23,12 @@ function TextIdentification() {
     if (!file) {
       return;
     }
+    Storage.put(file.name, file, {
+      contentType: file.type || 'image/png'
+    })
+      .then(result => console.log(`Upload: ${result}`))
+      .catch(err => console.log(err));
+    
     Predictions.identify({
       text: {
         source: {
@@ -35,6 +42,13 @@ function TextIdentification() {
       const table = JSON.stringify(text.tables || '');
       const fullText = text.fullText;
       console.log(response);
+      localStorage.setItem('test.json', JSON.stringify(response));
+      Storage.put(`${file.name}.digi.json`, JSON.stringify(response), {
+        contentType: 'json'
+      })
+        .then(result => console.log(`Upload response: ${result}`))
+        .catch(err => console.log(err));
+
       setResponse(fullText);
       setForm(form);
       setTable(table);
