@@ -2,11 +2,12 @@ import logo from './logo.png';
 import './App.css';
 import React, { useState } from 'react';
 import identifyText from './identify';
-import downloadForms from './downloadForms';
+import downloadForms from './downloadForms.js';
 import transformRawFiles from './transformRawFiles';
 import Amplify from 'aws-amplify';
 import { AmazonAIPredictionsProvider } from '@aws-amplify/predictions';
 import awsconfig from './aws-exports';
+import fileDownload  from 'js-file-download';
 
 Amplify.configure(awsconfig);
 Amplify.addPluggable(new AmazonAIPredictionsProvider());
@@ -21,7 +22,7 @@ function TextIdentification() {
     setResponse('identifying text...');
     const formData = await identifyText(event, logger);
     if (formData) {
-      setImageUrl(formData.imageUrl);
+      setImageUrl(`<div><img src="${formData.imageUrl}" className="App-img" alt="form" /></div>`);
       setResponse(JSON.stringify(formData));
     } else {
       setResponse(`Error processing`);
@@ -33,7 +34,7 @@ function TextIdentification() {
       <div>
         <h3>Text identification</h3>
         <div><input type="file" onChange={identifyFromFile}></input></div>
-        <div><img src={imageUrl} className="App-img" alt="form" /></div>
+        {imageUrl}
         <div>{responseForm}</div>
       </div>
     </div>
@@ -41,18 +42,21 @@ function TextIdentification() {
 }
 
 function FilesLoading(params) {
-  const [response, setFileLoadingResponse] = useState(" Json form will be show here ")
+  const [response, setFileLoadingResponse] = useState('')
 
   async function downloadJsonFromFiles() {
     setFileLoadingResponse('Reading files...');
     const jsonData = await downloadForms(logger);
+    if (jsonData) {
+      fileDownload(JSON.stringify(jsonData), 'digitrade.json');
+    }
     setFileLoadingResponse(jsonData ? 'Done' : 'Error');
   }
 
   return (
     <div className="Text">
       <div>
-        <h3>List of Json Files</h3>
+        <h3>Download Json With All Files</h3>
         <button onClick={downloadJsonFromFiles}>Download Forms</button>
         <div>{response}</div>
       </div>
@@ -61,7 +65,7 @@ function FilesLoading(params) {
 }
 
 function FilesTransform(params) {
-  const [response, setFileTransResponse] = useState(" Form Json form will be show here ")
+  const [response, setFileTransResponse] = useState('')
 
   async function downloadJsonRawFiles() {
     setFileTransResponse('Reading files...');
@@ -72,8 +76,8 @@ function FilesTransform(params) {
   return (
     <div className="Text">
       <div>
-        <h3>Transform All Files In S3</h3>
-        <button onClick={downloadJsonRawFiles}>Transform Raw To Forms</button>
+        <h3>Transform All Raw Files In S3</h3>
+        <button onClick={downloadJsonRawFiles}>Transform Raw To Form</button>
         <div>{response}</div>
       </div>
     </div>
