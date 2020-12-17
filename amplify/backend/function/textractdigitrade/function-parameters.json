@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "auth": {
+      "amplifytextract7f442847": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    },
+    "storage": {
+      "s3digitrade": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}
