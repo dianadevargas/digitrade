@@ -69,7 +69,7 @@ const transformLines = (lines) => {
       };
     }
 
-    if (line.toUpperCase() === 'TAX INVOICE **') {
+    if (line.toUpperCase().includes('TAX INVOICE')) {
       processingItems = true;;
     };
   });
